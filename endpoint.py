@@ -36,9 +36,11 @@ def welcome():
 def predict():
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         experience = data["experience"]
     else:
         experience = request.args.get('experience')
+        print(experience)
         
     predicted_salary = model.predict([[float(experience)]])
     return jsonify({"predicted_salary": predicted_salary[0]})
