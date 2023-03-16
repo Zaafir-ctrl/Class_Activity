@@ -1,6 +1,6 @@
-import pandas as pd
-import joblib
-from sklearn.linear_model import LinearRegression
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 # Load the dataset
 data = pd.read_csv("Salary_Data.csv")
@@ -19,15 +19,14 @@ predicted_salary = model.predict([[experience]])
 print("Predicted salary for {} years of experience: {}".format(experience, predicted_salary[0]))
 joblib.dump(model, 'linear_regression_model.pkl')
 
-
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
 # Load the trained model
 model = joblib.load('linear_regression_model.pkl')
 
-@app.route("/predict", methods=["GET","POST"])
+@app.route("/")
+def welcome():
+    return "Welcome to the Salary Prediction API!"
+
+@app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
     experience = data["experience"]
