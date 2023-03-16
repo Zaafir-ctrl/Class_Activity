@@ -32,7 +32,7 @@ model = joblib.load('linear_regression_model.pkl')
 def welcome():
     return render_template("index.html")
 
-@app.route("/predict", methods=['GET', 'POST'])
+@app.route("/predict", methods=['POST'])
 def predict():
     print(request.get_data())
     
