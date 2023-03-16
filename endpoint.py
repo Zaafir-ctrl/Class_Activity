@@ -37,13 +37,11 @@ def predict():
     if request.method == 'POST':
         data = request.get_json()
         experience = data["experience"]
-        predicted_salary = model.predict([[experience]])
-        return jsonify({"predicted_salary": predicted_salary[0]})
     else:
-        data = request.get_json()
-        experience = data["experience"]
-        predicted_salary = model.predict([[experience]])
-        return jsonify({"predicted_salary": predicted_salary[0]})
+        experience = request.args.get('experience')
+        
+    predicted_salary = model.predict([[float(experience)]])
+    return jsonify({"predicted_salary": predicted_salary[0]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
