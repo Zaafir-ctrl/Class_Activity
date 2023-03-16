@@ -27,8 +27,6 @@ model = joblib.load('linear_regression_model.pkl')
 
 @app.route("/")
 def welcome():
-    @app.route("/")
-def welcome():
     return render_template("index.html")
 
 @app.route("/predict", methods=["POST"])
