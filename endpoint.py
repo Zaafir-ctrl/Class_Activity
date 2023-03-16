@@ -34,6 +34,8 @@ def welcome():
 
 @app.route("/predict", methods=['GET', 'POST'])
 def predict():
+    print(request.get_data())
+    
     if request.method == 'POST':
         data = request.get_json()
         print(data)
