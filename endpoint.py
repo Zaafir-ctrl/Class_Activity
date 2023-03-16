@@ -32,12 +32,18 @@ model = joblib.load('linear_regression_model.pkl')
 def welcome():
     return render_template("index.html")
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=['GET', 'POST'])
 def predict():
-    data = request.get_json()
-    experience = data["experience"]
-    predicted_salary = model.predict([[experience]])
-    return jsonify({"predicted_salary": predicted_salary[0]})
+    if request.method == 'POST':
+        data = request.get_json()
+        experience = data["experience"]
+        predicted_salary = model.predict([[experience]])
+        return jsonify({"predicted_salary": predicted_salary[0]})
+    else:
+        data = request.get_json()
+        experience = data["experience"]
+        predicted_salary = model.predict([[experience]])
+        return jsonify({"predicted_salary": predicted_salary[0]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
