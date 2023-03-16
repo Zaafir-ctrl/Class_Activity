@@ -5,6 +5,8 @@ import joblib
 
 app = Flask(__name__)
 
+print(os.getcwd())
+
 # Load the dataset
 data = pd.read_csv("Salary_Data.csv")
 
