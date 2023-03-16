@@ -4,7 +4,7 @@ import os
 from sklearn.linear_model import LinearRegression
 import joblib
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='/app')
 
 print(os.getcwd())
 
@@ -40,4 +40,4 @@ def predict():
     return jsonify({"predicted_salary": predicted_salary[0]})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000,template_folder='/app')
+    app.run(host="0.0.0.0", port=8000)
