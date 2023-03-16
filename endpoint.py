@@ -35,18 +35,8 @@ def welcome():
 
 @app.route("/predict", methods=['POST'])
 def predict():
-    print(request.get_data())
-    print("hekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkko")
-    
-    if request.method == 'POST':
-        data = request.get_json()
-        print(data)
-        experience = data["experience"]
-    else:
-        experience = request.args.get('experience')
-        print(experience)
-        
-    predicted_salary = model.predict([[float(experience)]])
+    experience = float(request.form['experience'])
+    predicted_salary = model.predict([[experience]])
     return jsonify({"predicted_salary": predicted_salary[0]})
 
 if __name__ == "__main__":
